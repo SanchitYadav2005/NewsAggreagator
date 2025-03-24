@@ -40,9 +40,14 @@ const NewsFeed = ({ category }) => {
             {article.urlToImage && <img src={article.urlToImage} alt={article.title} className="news-image" />}
             <h3 className="news-title">{article.title}</h3>
             <p className="news-description">{article.description || "No description available."}</p>
-            <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more">
-              Read More →
-            </a>
+            
+            {/* Fixed Source Name Position */}
+            <div className="news-footer">
+              <span className="news-source">{article.source.name}</span>
+              <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more">
+                Read More →
+              </a>
+            </div>
           </div>
         ))}
       </div>

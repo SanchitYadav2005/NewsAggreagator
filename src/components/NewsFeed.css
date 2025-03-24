@@ -81,6 +81,10 @@
     text-align: center;
   }
   
+  .news-footer{
+    display: flex;
+    justify-content: space-evenly;
+  }
   /* Mobile & Tablet Adjustments */
   @media (max-width: 768px) {
     .news-container {
