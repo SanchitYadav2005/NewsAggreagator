@@ -1,17 +1,15 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar";
-import NewsFeed from "./components/NewsFeed";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
-  const [category, setCategory] = useState("general"); // Default category
-
   return (
-    <div>
-      <Navbar setCategory={setCategory} />
-      <NewsFeed category={category} />
-      <Footer/>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 

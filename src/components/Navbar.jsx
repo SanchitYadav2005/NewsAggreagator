@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ setCategory }) => {
@@ -45,7 +46,9 @@ const Navbar = ({ setCategory }) => {
                 </li>
               ))}
             </ul>
-            <button className="signup-btn">Sign Up</button>
+            <Link to={"/signup"}>
+              <button className="signup-btn">Sign Up</button>
+            </Link>
           </div>
         )}
 
