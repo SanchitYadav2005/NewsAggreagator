@@ -1,48 +1,42 @@
 const express = require("express");
+const bcrypt = require("bcrypt"); // Use bcryptjs or bcrypt
 const User = require("../models/User");
 const Bookmark = require("../models/Bookmark.js");
 
 const router = express.Router();
 
-// Create new user
+// Create new user with hashed password
 router.post("/signup", async (req, res) => {
   try {
     const { email, password } = req.body;
     const exists = await User.findOne({ email });
     if (exists) return res.status(400).json({ error: "User already exists" });
 
-    const user = new User({ email, password });
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt); // Hash and salt
+
+    const user = new User({ email, password: hashedPassword });
     await user.save();
-    res.status(201).json(user);
+    res.status(201).json({ user });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Signup failed" });
   }
 });
 
-// Add a bookmark
-router.post("/bookmark", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-    const { userId, title, url, source, image } = req.body;
-    const bookmark = new Bookmark({ user: userId, title, url, source, image });
-    await bookmark.save();
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
-    await User.findByIdAndUpdate(userId, {
-      $push: { bookmarks: bookmark._id },
-    });
-    res.status(201).json(bookmark);
+    if (!user) return res.status(400).json({ error: "Invalid email or password" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ error: "Invalid email or password" });
+
+    res.status(200).json({ user });
   } catch (err) {
-    res.status(500).json({ error: "Bookmark failed" });
+    console.error(err);
+    res.status(500).json({ error: "Login failed" });
   }
 });
-
-// Get user bookmarks
-router.get("/bookmarks/:userId", async (req, res) => {
-  try {
-    const bookmarks = await Bookmark.find({ user: req.params.userId });
-    res.status(200).json(bookmarks);
-  } catch (err) {
-    res.status(500).json({ error: "Fetch failed" });
-  }
-});
-
-module.exports = router;
