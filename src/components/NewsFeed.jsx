@@ -26,7 +26,7 @@ const NewsFeed = ({ category }) => {
     };
 
     fetchNews();
-  }, [category]); // Fetch news whenever category changes
+  }, [category]); 
 
   if (loading) return <p className="loading">Fetching {category} news...</p>;
   if (error) return <p className="error">{error}</p>;
