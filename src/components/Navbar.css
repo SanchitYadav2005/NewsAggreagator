@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap");
+
+.navbar {
+  font-family: "Orbitron", sans-serif;
+  background: black;
+  color: #e2e8f0;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(20, 184, 166, 0.3);
+  border-radius: 20px;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: bold;
+  color: #14b8a6;
+  letter-spacing: 1.5px;
+}
+
+/* Menu and Signup/User Button Group */
+.menu-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  gap: 12px;
+}
+
+.menu-item {
+  cursor: pointer;
+  font-size: 13px;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  color: #facc15;
+}
+
+/* Signup Button */
+.signup-btn {
+  font-size: 13px;
+  padding: 6px 12px;
+  background: #14b8a6;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.3s ease-in-out;
+}
+
+.signup-btn:hover {
+  background: #facc15;
+}
+
+/* 👤 User Icon Button */
+.user-btn {
+  background-color: transparent;
+  border: none;
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.user-btn:hover {
+  background-color: rgba(20, 184, 166, 0.2);
+}
+
+/* Mobile Menu */
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  background: #1e293b;
+  width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(20, 184, 166, 0.3);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu-item {
+  padding: 12px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.3s ease-in-out;
+}
+
+.mobile-menu-item:hover {
+  background: #14b8a6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
