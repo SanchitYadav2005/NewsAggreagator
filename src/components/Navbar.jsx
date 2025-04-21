@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ setCategory }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const menuItems = [
     "general",
@@ -16,11 +17,17 @@ const Navbar = ({ setCategory }) => {
     "entertainment",
   ];
 
+  // Check if user is logged in from localStorage
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    setIsLoggedIn(!!user);
+  }, []);
+
   // Handle screen resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) setIsOpen(false); // Close mobile menu on larger screens
+      if (window.innerWidth > 768) setIsOpen(false);
     };
 
     window.addEventListener("resize", handleResize);
@@ -32,7 +39,7 @@ const Navbar = ({ setCategory }) => {
       <div className="navbar-container">
         <h1 className="logo">News Aggregator</h1>
 
-        {/* Desktop Menu and Signup Button */}
+        {/* Desktop Menu */}
         {!isMobile && (
           <div className="menu-container">
             <ul className="menu">
@@ -46,9 +53,19 @@ const Navbar = ({ setCategory }) => {
                 </li>
               ))}
             </ul>
-            <Link to={"/signup"}>
-              <button className="signup-btn">Sign Up</button>
-            </Link>
+            
+            {/* ✅ Conditional User Icon or Signup Button */}
+            {isLoggedIn ? (
+              <Link to="/dashboard">
+                <button className="user-btn">
+                  <User size={20} />
+                </button>
+              </Link>
+            ) : (
+              <Link to="/signup">
+                <button className="signup-btn">Sign Up</button>
+              </Link>
+            )}
           </div>
         )}
 
@@ -77,7 +94,19 @@ const Navbar = ({ setCategory }) => {
               </li>
             ))}
           </ul>
-          <button className="signup-btn mobile-signup-btn">Sign Up</button>
+          
+          {/* ✅ Mobile User Icon or Signup Button */}
+          {isLoggedIn ? (
+            <Link to="/dashboard">
+              <button className="user-btn mobile-signup-btn">
+                <User size={20} />
+              </button>
+            </Link>
+          ) : (
+            <Link to="/signup">
+              <button className="signup-btn mobile-signup-btn">Sign Up</button>
+            </Link>
+          )}
         </div>
       )}
     </nav>

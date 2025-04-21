@@ -28,11 +28,11 @@
   letter-spacing: 1.5px;
 }
 
-/* Menu and Signup Button Group */
+/* Menu and Signup/User Button Group */
 .menu-container {
   display: flex;
   align-items: center;
-  gap: 15px; /* Space between menu and button */
+  gap: 15px;
 }
 
 .menu {
@@ -69,13 +69,28 @@
   background: #facc15;
 }
 
+/* 👤 User Icon Button */
+.user-btn {
+  background-color: transparent;
+  border: none;
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.user-btn:hover {
+  background-color: rgba(20, 184, 166, 0.2);
+}
+
 /* Mobile Menu */
 .menu-toggle {
   background: none;
   border: none;
   color: white;
   cursor: pointer;
-  display: none; /* Hide on desktop */
+  display: none;
 }
 
 .mobile-menu {
@@ -110,9 +125,9 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .menu {
-    display: none; /* Hide menu on mobile */
+    display: none;
   }
   .menu-toggle {
-    display: block; /* Show menu toggle on mobile */
+    display: block;
   }
 }

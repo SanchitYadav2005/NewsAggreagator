@@ -24,7 +24,16 @@ const Login = () => {
       }
 
       const data = await response.json();
-      console.log("User logged in:", data.user); // Optional: store user in context or localStorage
+
+      // ✅ Save user data to localStorage
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // ✅ (Optional) Save token if returned by the server
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      console.log("User logged in:", data.user);
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error.message);
@@ -52,7 +61,8 @@ const Login = () => {
         />
         <button type="submit">Login</button>
         <div className="auth-toggle">
-          Don't have an account? <span onClick={() => navigate("/signup")}>Sign Up</span>
+          Don't have an account?{" "}
+          <span onClick={() => navigate("/signup")}>Sign Up</span>
         </div>
       </form>
     </div>

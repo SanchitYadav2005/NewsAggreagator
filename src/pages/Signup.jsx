@@ -24,7 +24,16 @@ const Signup = () => {
       }
 
       const data = await response.json();
-      console.log("User signed up:", data.user); // Optional: store token or user info
+
+      // ✅ Save user data to localStorage
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      // ✅ (Optional) Save token if returned by server
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      console.log("User signed up:", data.user);
       navigate("/");
     } catch (error) {
       console.error("Signup failed:", error.message);
